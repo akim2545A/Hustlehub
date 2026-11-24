@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HustleHub - Kila Kitu Kimoja</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#f0f2f5;padding-bottom:80px}
+.header{background:#111827;color:#fff;padding:20px;text-align:center}
+.header h1{margin:0;font-size:26px}.header h1 span{color:#facc15}
+.container{max-width:480px;margin:auto;padding:15px}
+.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tool{background:#fff;border-radius:16px;padding:16px;text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.tool .emoji{font-size:32px}.tool h3{margin:8px 0 4px;font-size:15px}.tool p{margin:0;font-size:12px;color:#666}
+.price{background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:20px;font-weight:bold;font-size:12px;display:inline-block;margin-top:6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:8px 0;font-size:15px}
+button{width:100%;padding:13px;border:none;border-radius:10px;background:#111827;color:#fff;font-weight:bold;font-size:15px;cursor:pointer;margin-top:5px}
+button.green{background:#16a34a} button.yellow{background:#facc15;color:#111} button.purple{background:#7c3aed} button.outline{background:#fff;color:#111827;border:2px solid #111827}
+.paybox{background:#fff7ed;border:1px dashed #f59e0b;padding:12px;border-radius:12px;text-align:center;margin-top:10px}
+.freebox{background:#f0fdf4;border:2px dashed #16a34a;padding:12px;border-radius:12px;text-align:center;margin-top:10px}
+.hidden{display:none}.back{color:#111827;font-weight:bold;cursor:pointer;margin-bottom:10px;display:inline-block}
+.result{background:#f9fafb;padding:12px;border-radius:10px;margin-top:10px;white-space:pre-wrap;font-size:14px;line-height:1.6}
+.summary{background:#111827;color:#fff;padding:14px;border-radius:12px;margin-top:10px}
+.summary div{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #333}
+.tabs{display:flex;gap:8px;margin:10px 0}.tabs button{flex:1;padding:10px;font-size:13px}.tabs button.active{background:#7c3aed}
+</style>
+</head>
+<body>
+<div class="header"><h1>HUSTLE<span>HUB</span> 🇰🇪</h1><p>Kila Kitu Kimoja • Lipa na M-PESA</p></div>
+<div class="container">
+<div id="home">
+<div class="card" style="background:#dcfce7;text-align:center"><b>🎁 NEW USER? Jaribu Tool MOJA BURE!</b><p style="font-size:13px;margin:5px 0">Chagua tool yoyote, bonyeza "JARIBU BURE" - hulipi chochote mara ya kwanza!</p></div>
+<h2>Chagua Tool 👇</h2><div class="grid">
+<div class="tool" onclick="openTool('cv')"><div class="emoji">📄</div><h3>CV Maker</h3><p>Tengeneza CV Pro</p><span class="price">Ksh 100</span></div>
+<div class="tool" onclick="openTool('mpesa')"><div class="emoji">💰</div><h3>M-PESA Calc</h3><p>Fee + Daily Summary</p><span class="price">Ksh 20</span></div>
+<div class="tool" onclick="openTool('biz')"><div class="emoji">💼</div><h3>Biz Names</h3><p>Majina ya Biashara</p><span class="price">Ksh 50</span></div>
+<div class="tool" onclick="openTool('tiktok')"><div class="emoji">📱</div><h3>TikTok Studio</h3><p>Captions + Ideas</p><span class="price">Ksh 50</span></div>
+<div class="tool" onclick="openTool('football')" style="grid-column:span 2"><div class="emoji">⚽</div><h3>Football Predictor</h3><p>Prediction za Mechi</p><span class="price">Ksh 50</span></div>
+</div><div class="card" style="margin-top:15px;text-align:center"><h3>🔥 BUNDLE OFFER!</h3><p>Nunua zote 5 kwa <b>Ksh 200</b> badala ya 270!</p><button class="green">NUNUA BUNDLE - 200</button><p style="font-size:12px;color:#666">Till: 0791921883 - HustleHub</p></div></div>
+
+<!-- CV -->
+<div id="tool-cv" class="hidden"><span class="back" onclick="goHome()">← Rudi Home</span><div class="card"><h2>📄 CV Maker - Ksh 100</h2><div id="cv-lock"><div class="freebox" id="cv-freebox"><b>🎁 FIRST TIME? JARIBU BURE!</b><br><button class="green" onclick="tryFree('cv')">JARIBU BURE SASA - 0 BOB</button><p style="font-size:12px">Hii ni mara moja tu kwa simu mpya.</p></div><div class="paybox"><b>LIPA - Ksh 100</b><br>Lipa 100 kwa <b>0791921883</b><br><input id="cv-code" placeholder="Weka M-PESA Code"><button class="green" onclick="unlock('cv')">FUNGUA CV MAKER</button></div></div><div id="cv-content" class="hidden"><input id="cv-name" placeholder="Jina Kamili"><input id="cv-phone" placeholder="Simu"><input id="cv-job" placeholder="Kazi Unayotaka"><textarea id="cv-skills" placeholder="Skills zako"></textarea><button onclick="makeCV()">TENGENEZA CV YANGU</button><div id="cv-out" class="result"></div></div></div></div>
+
+<!-- MPESA -->
+<div id="tool-mpesa" class="hidden"><span class="back" onclick="goHome()">← Rudi Home</span><div class="card"><h2>💰 M-PESA Calculator - Ksh 20</h2><div id="mpesa-lock"><div class="freebox" id="mpesa-freebox"><b>🎁 FIRST TIME? JARIBU BURE!</b><br><button class="green" onclick="tryFree('mpesa')">JARIBU BURE SASA</button></div><div class="paybox"><b>LIPA - Ksh 20</b><br>Lipa 20 kwa <b>0791921883</b><br><input id="mpesa-code" placeholder="Weka M-PESA Code"><button class="green" onclick="unlock('mpesa')">FUNGUA - 20 BOB</button></div></div><div id="mpesa-content" class="hidden"><label>Unatuma Pesa Ngapi?</label><input type="number" id="send-amt" placeholder="e.g. 1000"><select id="send-type"><option value="send">Kutuma kwa Mtu</option><option value="withdraw">Kutoa (Agent)</option><option value="paybill">Paybill</option></select><button onclick="calcFee()">HESABU FEE</button><div id="fee-out" class="result"></div><hr><h3>📊 Daily Usage - Leo</h3><input type="number" id="daily-amt" placeholder="Kiasi ulichotuma leo"><button class="yellow" onclick="addDaily()">ONGEZA KWA LEO</button><div class="summary"><div><span>Umetuma Leo:</span><b id="sum-sent">Ksh 0</b></div><div><span>Fee Ulilipa:</span><b id="sum-fee">Ksh 0</b></div><div><span>Miamala:</span><b id="sum-count">0</b></div><div><span>Total Umetumia:</span><b id="sum-total">Ksh 0</b></div></div><div id="daily-list" class="result">Bado hakuna miamala leo.</div></div></div></div>
+
+<!-- BIZ -->
+<div id="tool-biz" class="hidden"><span class="back" onclick="goHome()">← Rudi Home</span><div class="card"><h2>💼 Biz Name Generator - Ksh 50</h2><div id="biz-lock"><div class="freebox" id="biz-freebox"><b>🎁 FIRST TIME? JARIBU BURE!</b><br><button class="green" onclick="tryFree('biz')">JARIBU BURE SASA</button></div><div class="paybox"><b>LIPA - Ksh 50</b><br>Lipa 50 kwa <b>0791921883</b><br><input id="biz-code" placeholder="Weka M-PESA Code"><button class="green" onclick="unlock('biz')">FUNGUA - 50 BOB</button></div></div><div id="biz-content" class="hidden"><input id="biz-type" placeholder="Biashara gani? e.g. Salon"><button onclick="genBiz()">NIPA MAJINA 10</button><div id="biz-out" class="result"></div></div></div></div>
+
+<!-- TIKTOK NEW -->
+<div id="tool-tiktok" class="hidden"><span class="back" onclick="goHome()">← Rudi Home</span><div class="card"><h2>📱 TikTok Studio - Ksh 50</h2><div id="tiktok-lock"><div class="freebox" id="tiktok-freebox"><b>🎁 FIRST TIME? JARIBU BURE!</b><br><button class="green" onclick="tryFree('tiktok')">JARIBU BURE SASA</button></div><div class="paybox"><b>LIPA - Ksh 50</b><br>Lipa 50 kwa <b>0791921883</b><br><input id="tiktok-code" placeholder="Weka M-PESA Code"><button class="green" onclick="unlock('tiktok')">FUNGUA - 50 BOB</button></div></div><div id="tiktok-content" class="hidden">
+<div class="tabs"><button id="tab-cap" class="active" onclick="showTab('cap')">✍️ Captions</button><button id="tab-idea" onclick="showTab('idea')">💡 Content Ideas</button></div>
+<div id="tt-cap"><input id="tt-topic" placeholder="Video yako ni kuhusu nini? e.g. Kupika"><button class="purple" onclick="genTT()">NIPA CAPTIONS</button><div id="tt-out" class="result"></div></div>
+<div id="tt-idea" class="hidden"><input id="tt-niche" placeholder="Niche yako? e.g. Food, Football, Comedy"><button class="purple" onclick="genIdeas()">NIPA IDEAS 5 ZA LEO</button><div id="tt-idea-out" class="result"></div></div>
+</div></div></div>
+
+<!-- FOOTBALL -->
+<div id="tool-football" class="hidden"><span class="back" onclick="goHome()">← Rudi Home</span><div class="card"><h2>⚽ Football Predictor - Ksh 50</h2><div id="football-lock"><div class="freebox" id="football-freebox"><b>🎁 FIRST TIME? JARIBU BURE!</b><br><button class="green" onclick="tryFree('football')">JARIBU BURE SASA</button></div><div class="paybox"><b>LIPA - Ksh 50</b><br>Lipa 50 kwa <b>0791921883</b><br><input id="football-code" placeholder="Weka M-PESA Code"><button class="green" onclick="unlock('football')">FUNGUA - 50 BOB</button></div></div><div id="football-content" class="hidden"><input id="team1" placeholder="Team 1 e.g. Arsenal"><input id="team2" placeholder="Team 2 e.g. Chelsea"><button onclick="predict()">PREDICT MECHI</button><div id="foot-out" class="result"></div></div></div></div>
+</div>
+<script>
+let unlocked={}; let daily=[];
+let freeUsed = localStorage.getItem('hh_free_used')==='1';
+function hideFreeBoxes(){if(freeUsed){document.querySelectorAll('.freebox').forEach(e=>e.style.display='none')}}
+hideFreeBoxes();
+function goHome(){document.querySelectorAll('[id^="tool-"]').forEach(e=>e.classList.add('hidden'));document.getElementById('home').classList.remove('hidden')}
+function openTool(name){document.getElementById('home').classList.add('hidden');document.getElementById('tool-'+name).classList.remove('hidden');if(unlocked[name]){document.getElementById(name+'-lock').classList.add('hidden');document.getElementById(name+'-content').classList.remove('hidden')}}
+function unlock(name){let code=document.getElementById(name+'-code').value.trim();if(code.length<5){alert('Weka M-PESA Code sahihi!');return}unlocked[name]=true;document.getElementById(name+'-lock').classList.add('hidden');document.getElementById(name+'-content').classList.remove('hidden');alert('Asante! Imefunguliwa ✅')}
+function tryFree(name){if(freeUsed){alert('Umeshatumia Free Trial yako! Lipa sasa ili kuendelea.');return}if(!confirm('Unataka kutumia Free Trial yako ya mara moja kwa hii tool?'))return;
